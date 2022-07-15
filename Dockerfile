@@ -7,15 +7,20 @@ FROM ${BASE_IMAGE} as builder
 
 # Create the runtime image.
 
-ENV REFRESHED_AT=2022-07-14
-
-LABEL Name="senzing/senzingapi-runtime" \
-      Maintainer="support@senzing.com" \
-      Version="3.1.0"
-
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-runtime=3.1.2-22194"
-ARG SENZING_APT_REPOSITORY_URL="https://senzing-production-apt.s3.amazonaws.com/senzingrepo_1.0.0-1_amd64.deb"
+ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.1-22196"
+ARG SENZING_APT_REPOSITORY_NAME="senzingrepo_1.0.0-1_amd64.deb"
+ARG SENZING_APT_REPOSITORY_URL="https://senzing-production-apt.s3.amazonaws.com"
+
+ENV IMAGE_NAME="senzing/senzingapi-tools"
+ENV IMAGE_MAINTAINER="support@senzing.com"
+ENV IMAGE_VERSION="3.1.0"
+
+ENV REFRESHED_AT=2022-07-15
+
+LABEL Name=${IMAGE_NAME} \
+      Maintainer=${IMAGE_MAINTAINER} \
+      Version=${IMAGE_VERSION}
 
 # Run as "root" for system installation.
 
@@ -28,7 +33,7 @@ ENV TERM=xterm
 # Install packages via apt.
 
 RUN apt update \
- && apt-get -y install \
+ && apt -y install \
         curl \
         gnupg \
         wget
@@ -36,10 +41,10 @@ RUN apt update \
 # Install Senzing repository index.
 
 RUN curl \
-        --output /senzingrepo_1.0.0-1_amd64.deb \
-        ${SENZING_APT_REPOSITORY_URL} \
+        --output /${SENZING_APT_REPOSITORY_NAME} \
+        ${SENZING_APT_REPOSITORY_URL}/${SENZING_APT_REPOSITORY_NAME} \
  && apt -y install \
-        /senzingrepo_1.0.0-1_amd64.deb \
+        /${SENZING_APT_REPOSITORY_NAME} \
  && apt update
 
 # Install Senzing package.
@@ -52,17 +57,29 @@ RUN apt -y install ${SENZING_APT_INSTALL_PACKAGE}
 
 FROM ${BASE_IMAGE} AS runner
 
-ENV REFRESHED_AT=2022-07-14
+LABEL Name=${IMAGE_NAME} \
+      Maintainer=${IMAGE_MAINTAINER} \
+      Version=${IMAGE_VERSION}
 
-LABEL Name="senzing/senzingapi-runtime" \
-      Maintainer="support@senzing.com" \
-      Version="3.1.0"
+# Runtime execution.
+
+WORKDIR /
+CMD ["/bin/bash"]
+
+# Install packages via apt.
 
 RUN apt update \
  && apt -y install \
-        libssl1.1 \
- && apt-get clean \
+      python3-pip \
+ && apt clean \
  && rm -rf /var/lib/apt/lists/*
+
+# Install packages via pip.
+
+COPY requirements.txt .
+RUN pip3 install --upgrade pip \
+ && pip3 install -r requirements.txt \
+ && rm /requirements.txt
 
 # Copy files from builder.
 
@@ -71,7 +88,15 @@ COPY --from=builder /etc/opt/senzing  /etc/opt/senzing
 
 # Set environment variables for root.
 
-ENV LD_LIBRARY_PATH=/opt/senzing/g2/lib
+ENV LANGUAGE=C \
+    LC_ALL=C \
+    LD_LIBRARY_PATH=/opt/senzing/g2/lib \
+    PATH=${PATH}:/opt/senzing/g2/python \
+    PYTHONPATH=/opt/senzing/g2/python \
+    PYTHONUNBUFFERED=1 \
+    SENZING_DOCKER_LAUNCHED=true \
+    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true \
+    TERM=xterm
 
 # Runtime execution.
 
