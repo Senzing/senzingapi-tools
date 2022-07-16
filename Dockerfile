@@ -1,8 +1,8 @@
 ARG BASE_IMAGE=debian:11.3-slim@sha256:f6957458017ec31c4e325a76f39d6323c4c21b0e31572efa006baa927a160891
 
-ENV IMAGE_NAME="senzing/senzingapi-tools"
-ENV IMAGE_MAINTAINER="support@senzing.com"
-ENV IMAGE_VERSION="3.1.0"
+ARG IMAGE_NAME="senzing/senzingapi-tools"
+ARG IMAGE_MAINTAINER="support@senzing.com"
+ARG IMAGE_VERSION="3.1.0"
 
 # -----------------------------------------------------------------------------
 # Stage: Builder
