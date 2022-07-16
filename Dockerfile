@@ -19,14 +19,6 @@ ARG SENZING_APT_REPOSITORY_URL="https://senzing-production-apt.s3.amazonaws.com"
 
 ENV REFRESHED_AT=2022-07-15
 
-ARG IMAGE_NAME
-ARG IMAGE_MAINTAINER
-ARG IMAGE_VERSION
-
-LABEL Name=${IMAGE_NAME} \
-      Maintainer=${IMAGE_MAINTAINER} \
-      Version=${IMAGE_VERSION}
-
 # Run as "root" for system installation.
 
 USER root
