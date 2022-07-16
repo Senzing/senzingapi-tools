@@ -1,9 +1,14 @@
 ARG BASE_IMAGE=debian:11.3-slim@sha256:f6957458017ec31c4e325a76f39d6323c4c21b0e31572efa006baa927a160891
-FROM ${BASE_IMAGE} as builder
+
+ENV IMAGE_NAME="senzing/senzingapi-tools"
+ENV IMAGE_MAINTAINER="support@senzing.com"
+ENV IMAGE_VERSION="3.1.0"
 
 # -----------------------------------------------------------------------------
 # Stage: Builder
 # -----------------------------------------------------------------------------
+
+FROM ${BASE_IMAGE} as builder
 
 # Create the runtime image.
 
@@ -12,11 +17,11 @@ ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.1-22196"
 ARG SENZING_APT_REPOSITORY_NAME="senzingrepo_1.0.0-1_amd64.deb"
 ARG SENZING_APT_REPOSITORY_URL="https://senzing-production-apt.s3.amazonaws.com"
 
-ENV IMAGE_NAME="senzing/senzingapi-tools"
-ENV IMAGE_MAINTAINER="support@senzing.com"
-ENV IMAGE_VERSION="3.1.0"
-
 ENV REFRESHED_AT=2022-07-15
+
+ARG IMAGE_NAME
+ARG IMAGE_MAINTAINER
+ARG IMAGE_VERSION
 
 LABEL Name=${IMAGE_NAME} \
       Maintainer=${IMAGE_MAINTAINER} \
@@ -56,6 +61,10 @@ RUN apt -y install ${SENZING_APT_INSTALL_PACKAGE}
 # -----------------------------------------------------------------------------
 
 FROM ${BASE_IMAGE} AS runner
+
+ARG IMAGE_NAME
+ARG IMAGE_MAINTAINER
+ARG IMAGE_VERSION
 
 LABEL Name=${IMAGE_NAME} \
       Maintainer=${IMAGE_MAINTAINER} \
