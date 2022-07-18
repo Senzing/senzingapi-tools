@@ -51,8 +51,7 @@ ENV LANGUAGE=C \
     PYTHONPATH=/opt/senzing/g2/python \
     PYTHONUNBUFFERED=1 \
     SENZING_DOCKER_LAUNCHED=true \
-    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true \
-    TERM=xterm
+    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true
 
 # Runtime execution.
 
