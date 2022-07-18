@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.1-22196"
+ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.2-22199"
 
 ENV REFRESHED_AT=2022-07-18
 
@@ -25,7 +25,9 @@ ENV TERM=xterm
 
 # Install Senzing package.
 
-RUN apt -y install ${SENZING_APT_INSTALL_PACKAGE}
+RUN apt update \
+ && apt -y install ${SENZING_APT_INSTALL_PACKAGE} \
+ && apt clean
 
 # Install packages via apt.
 
