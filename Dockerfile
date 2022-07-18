@@ -1,5 +1,4 @@
 ARG BASE_IMAGE=senzing/senzingapi-runtime:latest
-
 FROM ${BASE_IMAGE} as builder
 
 # Create the runtime image.
