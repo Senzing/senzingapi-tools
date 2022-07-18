@@ -32,8 +32,7 @@ RUN apt -y install ${SENZING_APT_INSTALL_PACKAGE}
 RUN apt update \
  && apt -y install \
       python3-pip \
- && apt clean \
- && rm -rf /var/lib/apt/lists/*
+ && apt clean
 
 # Install packages via pip.
 
