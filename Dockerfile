@@ -1,23 +1,19 @@
-ARG BASE_IMAGE=debian:11.3-slim@sha256:f6957458017ec31c4e325a76f39d6323c4c21b0e31572efa006baa927a160891
-
-ARG IMAGE_NAME="senzing/senzingapi-tools"
-ARG IMAGE_MAINTAINER="support@senzing.com"
-ARG IMAGE_VERSION="3.1.0"
-
-# -----------------------------------------------------------------------------
-# Stage: Builder
-# -----------------------------------------------------------------------------
-
-FROM ${BASE_IMAGE} as builder
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.1.1
+FROM ${BASE_IMAGE}
 
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.1-22196"
-ARG SENZING_APT_REPOSITORY_NAME="senzingrepo_1.0.0-1_amd64.deb"
-ARG SENZING_APT_REPOSITORY_URL="https://senzing-production-apt.s3.amazonaws.com"
+ARG SENZING_APT_INSTALL_PACKAGE_TOOLS="senzingapi-tools=0.1.2-22199"
 
-ENV REFRESHED_AT=2022-07-15
+ENV REFRESHED_AT=2022-07-18
+
+ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
+    SENZING_APT_INSTALL_PACKAGE_TOOLS=${SENZING_APT_INSTALL_PACKAGE_TOOLS}
+
+LABEL Name="senzing/senzingapi-tools" \
+      Maintainer="support@senzing.com" \
+      Version="3.1.0"
 
 # Run as "root" for system installation.
 
@@ -27,53 +23,18 @@ USER root
 
 ENV TERM=xterm
 
-# Install packages via apt.
-
-RUN apt update \
- && apt -y install \
-        curl \
-        gnupg \
-        wget
-
-# Install Senzing repository index.
-
-RUN curl \
-        --output /${SENZING_APT_REPOSITORY_NAME} \
-        ${SENZING_APT_REPOSITORY_URL}/${SENZING_APT_REPOSITORY_NAME} \
- && apt -y install \
-        /${SENZING_APT_REPOSITORY_NAME} \
- && apt update
-
 # Install Senzing package.
 
-RUN apt -y install ${SENZING_APT_INSTALL_PACKAGE}
-
-# -----------------------------------------------------------------------------
-# Stage: Final
-# -----------------------------------------------------------------------------
-
-FROM ${BASE_IMAGE} AS runner
-
-ARG IMAGE_NAME
-ARG IMAGE_MAINTAINER
-ARG IMAGE_VERSION
-
-LABEL Name=${IMAGE_NAME} \
-      Maintainer=${IMAGE_MAINTAINER} \
-      Version=${IMAGE_VERSION}
-
-# Runtime execution.
-
-WORKDIR /
-CMD ["/bin/bash"]
+RUN apt update \
+ && apt -y install ${SENZING_APT_INSTALL_PACKAGE_TOOLS} \
+ && apt clean
 
 # Install packages via apt.
 
 RUN apt update \
  && apt -y install \
       python3-pip \
- && apt clean \
- && rm -rf /var/lib/apt/lists/*
+ && apt clean
 
 # Install packages via pip.
 
@@ -81,11 +42,6 @@ COPY requirements.txt .
 RUN pip3 install --upgrade pip \
  && pip3 install -r requirements.txt \
  && rm /requirements.txt
-
-# Copy files from builder.
-
-COPY --from=builder /opt/senzing      /opt/senzing
-COPY --from=builder /etc/opt/senzing  /etc/opt/senzing
 
 # Set environment variables for root.
 
@@ -96,8 +52,7 @@ ENV LANGUAGE=C \
     PYTHONPATH=/opt/senzing/g2/python \
     PYTHONUNBUFFERED=1 \
     SENZING_DOCKER_LAUNCHED=true \
-    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true \
-    TERM=xterm
+    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true
 
 # Runtime execution.
 
