@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=senzing/senzingapi-runtime:latest
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.1.1
 FROM ${BASE_IMAGE}
 
 # Create the runtime image.
