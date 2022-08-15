@@ -13,7 +13,7 @@ ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
-      Version="3.1.0"
+      Version="3.1.1"
 
 # Run as "root" for system installation.
 
