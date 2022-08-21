@@ -33,6 +33,7 @@ RUN apt update \
 
 RUN apt update \
  && apt -y install \
+      less \
       python3-pip \
  && apt clean
 
@@ -46,7 +47,7 @@ RUN pip3 install --upgrade pip \
 # Set environment variables for root.
 
 ENV LANGUAGE=C \
-    LC_ALL=C \
+    LC_ALL=C.UTF-8 \
     LD_LIBRARY_PATH=/opt/senzing/g2/lib \
     PATH=${PATH}:/opt/senzing/g2/python \
     PYTHONPATH=/opt/senzing/g2/python:/opt/senzing/g2/sdk/python \
