@@ -4,9 +4,9 @@ FROM ${BASE_IMAGE}
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=0.1.2-22199"
+ARG SENZING_APT_INSTALL_PACKAGE="senzingapi-tools=3.2.0-22229"
 
-ENV REFRESHED_AT=2022-07-18
+ENV REFRESHED_AT=2022-08-22
 
 ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
     SENZING_APT_INSTALL_PACKAGE=${SENZING_APT_INSTALL_PACKAGE}
@@ -33,16 +33,8 @@ RUN apt update \
 
 RUN apt update \
  && apt -y install \
-      less \
-      python3-pip \
+      python3-psycopg2 \
  && apt clean
-
-# Install packages via pip.
-
-COPY requirements.txt .
-RUN pip3 install --upgrade pip \
- && pip3 install -r requirements.txt \
- && rm /requirements.txt
 
 # Set environment variables for root.
 
