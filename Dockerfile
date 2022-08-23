@@ -25,16 +25,16 @@ ENV TERM=xterm
 
 # Install Senzing package.
 
-RUN apt update \
- && apt -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE} \
- && apt clean
+RUN apt-get update \
+ && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE} \
+ && apt-get clean
 
 # Install packages via apt.
 
-RUN apt update \
- && apt -y install \
+RUN apt-get update \
+ && apt-get -y install \
       python3-psycopg2 \
- && apt clean
+ && apt-get clean
 
 # Set environment variables for root.
 
