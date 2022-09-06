@@ -27,14 +27,14 @@ ENV TERM=xterm
 
 RUN apt-get update \
  && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE} \
- && apt-get clean
+ && rm -rf /var/lib/apt/lists/*
 
 # Install packages via apt.
 
 RUN apt-get update \
  && apt-get -y install \
       python3-psycopg2 \
- && apt-get clean
+ && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for root.
 
