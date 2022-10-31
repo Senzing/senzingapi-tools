@@ -1,19 +1,19 @@
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.3.1
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.3.2
 FROM ${BASE_IMAGE}
 
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.3.1-22283"
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.3.2-22299"
 
-ENV REFRESHED_AT=2022-10-11
+ENV REFRESHED_AT=2022-10-27
 
 ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
     SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
-      Version="3.3.1"
+      Version="3.3.2"
 
 # Run as "root" for system installation.
 
