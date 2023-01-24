@@ -1,4 +1,4 @@
-name: Senzing CI/CD Deploy
+name: senzing-cicd-deploy.yaml
 on:
   push:
     branches:
