@@ -1,4 +1,4 @@
-name: Senzing CI/CD Build & Test
+name: senzing-cicd-buildtest.yaml
 on:
   pull_request:
     branches:

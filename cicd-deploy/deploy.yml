@@ -4,7 +4,7 @@ env:
   variables:
     IMAGE_REPO_NAME: "senzingapi-tools"
     IMAGE_TAG: "latest"
-    ECR_URI: "283428323412.dkr.ecr.us-east-1.amazonaws.com"
+    ECR_URI: "897910034638.dkr.ecr.us-east-1.amazonaws.com"
   secrets-manager:
     DOCKERHUB_PASS: "/dockerhub/credentials:password"
     DOCKERHUB_USER: "/dockerhub/credentials:username"
