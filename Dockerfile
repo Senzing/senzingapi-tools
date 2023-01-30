@@ -4,8 +4,6 @@ FROM ${BASE_IMAGE}
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.4.0-23005"
-ARG REFRESHED_AT="2023-01-30"
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -13,7 +11,7 @@ ARG REFRESHED_AT="2023-01-30"
 
 FROM ${BASE_IMAGE} AS builder
 
-ENV REFRESHED_AT=${REFRESHED_AT}
+ENV REFRESHED_AT=2023-01-29
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
@@ -54,7 +52,9 @@ RUN pip3 install --upgrade pip \
 
 FROM ${BASE_IMAGE} AS runner
 
-ENV REFRESHED_AT=${REFRESHED_AT}
+ENV REFRESHED_AT=2023-01-30
+
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.4.0-23005"
 
 ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
     SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
@@ -74,8 +74,7 @@ ENV TERM=xterm
 # Install Senzing package.
 
 RUN apt-get update \
- && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE} \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 # Install packages via apt.
 
