@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Updated Dockerfile to a two stage build so that we can pull in a newer version of `prettytable`
  - Updated Dockerfile FROM to `senzing/senzingapi-runtime:3.4.1`
 
+
+
 ## [3.4.0] - 2023-01-12
 
 ### Changed in 3.4.0
