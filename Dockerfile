@@ -1,9 +1,9 @@
 ARG BASE_IMAGE=senzing/senzingapi-runtime:3.4.0
-FROM ${BASE_IMAGE}
 
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.4.0-23005"
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -11,7 +11,7 @@ ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
 
 FROM ${BASE_IMAGE} AS builder
 
-ENV REFRESHED_AT=2023-01-29
+ENV REFRESHED_AT=2023-01-30
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
@@ -54,7 +54,8 @@ FROM ${BASE_IMAGE} AS runner
 
 ENV REFRESHED_AT=2023-01-30
 
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.4.0-23005"
+ARG SENZING_ACCEPT_EULA
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE
 
 ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
     SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
