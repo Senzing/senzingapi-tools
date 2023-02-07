@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     IMAGE_REPO_NAME: "senzingapi-tools"
-    IMAGE_TAG: "latest"
+    IMAGE_TAG: "staging"
     ECR_URI: "897910034638.dkr.ecr.us-east-1.amazonaws.com"
   secrets-manager:
     DOCKERHUB_PASS: "/dockerhub/credentials:password"
