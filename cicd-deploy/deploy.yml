@@ -1,0 +1,28 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO_NAME: "senzingapi-tools"
+    IMAGE_TAG: "staging"
+    ECR_URI: "897910034638.dkr.ecr.us-east-1.amazonaws.com"
+  secrets-manager:
+    DOCKERHUB_PASS: "/dockerhub/credentials:password"
+    DOCKERHUB_USER: "/dockerhub/credentials:username"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_URI
+      - docker login --username $DOCKERHUB_USER --password $DOCKERHUB_PASS
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $ECR_URI/$IMAGE_REPO_NAME:$IMAGE_TAG      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $ECR_URI/$IMAGE_REPO_NAME:$IMAGE_TAG
