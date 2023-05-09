@@ -3,7 +3,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.5.2
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.5.2-23125"
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.5.2-23121"
 
 # -----------------------------------------------------------------------------
 # Stage: builder
