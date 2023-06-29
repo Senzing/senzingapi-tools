@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.5.3
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.6.0
 
 # Create the runtime image.
 
@@ -11,7 +11,7 @@ ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.5.3-23152"
 
 FROM ${BASE_IMAGE} AS builder
 
-ENV REFRESHED_AT=2023-06-15
+ENV REFRESHED_AT=2023-06-29
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
@@ -52,7 +52,7 @@ RUN pip3 install --upgrade pip \
 
 FROM ${BASE_IMAGE} AS runner
 
-ENV REFRESHED_AT=2023-06-15
+ENV REFRESHED_AT=2023-06-29
 
 ARG SENZING_ACCEPT_EULA
 ARG SENZING_APT_INSTALL_TOOLS_PACKAGE
