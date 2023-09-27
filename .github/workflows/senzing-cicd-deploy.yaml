@@ -1,8 +1,10 @@
 name: senzing-cicd-deploy.yaml
+
 on:
   push:
     branches:
       - main
+
 jobs:
   senzing-cicd-deploy:
     name: Deploy to ECR via codebuild

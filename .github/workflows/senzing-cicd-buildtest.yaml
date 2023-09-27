@@ -1,8 +1,10 @@
 name: senzing-cicd-buildtest.yaml
+
 on:
   pull_request:
     branches:
       - main
+
 jobs:
   senzing-cicd-buildtest:
     name: Build and test code via codebuild
