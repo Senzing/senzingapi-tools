@@ -27,6 +27,6 @@ jobs:
             --no-cache \
             --platform linux/amd64 \
             --push \
-            --tag senzing/sengingapi-tools \
             --tag senzing/senzingapi-tools:${{ github.ref_name }} \
+            --tag senzing/senzingapi-tools:latest \
             .
