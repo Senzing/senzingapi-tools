@@ -33,7 +33,7 @@ RUN apt update \
  && rm -rf /var/lib/apt/lists/*
 
 # Create and activate virtual environment.
-RUN python3 -m venv --without-pip /app/venv
+RUN python3 -m venv /app/venv
 ENV PATH="/app/venv/bin:$PATH"
 
 # Install packages via PIP.
@@ -42,7 +42,7 @@ COPY requirements.txt .
 RUN pip3 install --upgrade pip \
  && pip3 install -r requirements.txt \
  && rm requirements.txt \
- && pip3 uninstall -y pip
+ && pip3 uninstall -y setuptools pip
 
 # -----------------------------------------------------------------------------
 # Stage: Final
