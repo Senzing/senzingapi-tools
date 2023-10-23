@@ -19,7 +19,7 @@ fi
 # /opt/senzing/data/libpostal/data_version
 FILE=/opt/senzing/data/libpostal/data_version
 if test -f "$FILE"; then
-    echo "$FILE exists."
+    echo "[INFO] $FILE exists."
 else
     echo "[ERROR] $FILE does not exist."
     exit 1
