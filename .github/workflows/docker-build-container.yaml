@@ -8,17 +8,25 @@ on:
 
 jobs:
   docker-build-container:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: "0"
+
       - name: git config
         run: |
           git config user.name github-actions
           git config user.email support@senzing.com
+
       - name: Git Update submodules
         run: git submodule update --init --recursive
+
       - name: Build Docker container
         run: make docker-build
+
+      - name: Test Docker container
+        run: make docker-test
