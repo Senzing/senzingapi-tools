@@ -10,6 +10,5 @@ jobs:
         uses: Senzing/github-action-docker-buildx-build@latest
         with:
           image-repository: senzing/senzingapi-tools
-          image-tag: ${{ github.ref_name }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
