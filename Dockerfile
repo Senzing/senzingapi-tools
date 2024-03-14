@@ -13,10 +13,6 @@ FROM ${BASE_IMAGE} AS builder
 
 ENV REFRESHED_AT=2024-03-14
 
-LABEL Name="senzing/senzingapi-tools" \
-    Maintainer="support@senzing.com" \
-    Version="3.8.3"
-
 # Run as "root" for system installation.
 
 USER root
