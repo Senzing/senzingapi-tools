@@ -3,7 +3,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.8.3
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.8.2-24011"
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.8.3-24043"
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -14,8 +14,8 @@ FROM ${BASE_IMAGE} AS builder
 ENV REFRESHED_AT=2024-03-14
 
 LABEL Name="senzing/senzingapi-tools" \
-      Maintainer="support@senzing.com" \
-      Version="3.8.2"
+    Maintainer="support@senzing.com" \
+    Version="3.8.3"
 
 # Run as "root" for system installation.
 
@@ -24,13 +24,13 @@ USER root
 # Install packages via apt.
 
 RUN apt update \
- && apt -y install \
-      python3 \
-      python3-dev \
-      python3-pip \
-      python3-venv \
- && apt clean \
- && rm -rf /var/lib/apt/lists/*
+    && apt -y install \
+    python3 \
+    python3-dev \
+    python3-pip \
+    python3-venv \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create and activate virtual environment.
 RUN python3 -m venv /app/venv
@@ -40,9 +40,9 @@ ENV PATH="/app/venv/bin:$PATH"
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip \
- && pip3 install -r requirements.txt \
- && rm requirements.txt \
- && pip3 uninstall -y setuptools pip
+    && pip3 install -r requirements.txt \
+    && rm requirements.txt \
+    && pip3 uninstall -y setuptools pip
 
 # -----------------------------------------------------------------------------
 # Stage: Final
@@ -61,8 +61,8 @@ ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
     SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 LABEL Name="senzing/senzingapi-tools" \
-      Maintainer="support@senzing.com" \
-      Version="3.8.2"
+    Maintainer="support@senzing.com" \
+    Version="3.8.3"
 
 # Run as "root" for system installation.
 
@@ -75,15 +75,15 @@ ENV TERM=xterm
 # Install Senzing package.
 
 RUN apt-get update \
- && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
+    && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 # Install packages via apt.
 
 RUN apt-get update \
- && apt-get -y install \
-      python3-psycopg2 \
-      python3-venv \
- && rm -rf /var/lib/apt/lists/*
+    && apt-get -y install \
+    python3-psycopg2 \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy python virtual environment from the builder image.
 
