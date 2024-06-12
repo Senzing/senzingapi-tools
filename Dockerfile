@@ -17,15 +17,15 @@ ENV REFRESHED_AT=2024-05-22
 
 USER root
 
-# Install packages via apt.
+# Install packages via apt-get.
 
-RUN apt update \
-  && apt -y install \
+RUN apt-get update \
+  && apt-get -y install \
   python3 \
   python3-dev \
   python3-pip \
   python3-venv \
-  && apt clean \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Create and activate virtual environment.
@@ -73,6 +73,8 @@ ENV TERM=xterm
 RUN apt-get update \
   && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
+HEALTHCHECK CMD apt list --installed | grep senzingapi-tools
+
 # Install packages via apt.
 
 RUN apt-get update \
@@ -84,6 +86,8 @@ RUN apt-get update \
 # Copy python virtual environment from the builder image.
 
 COPY --from=builder /app/venv /app/venv
+
+USER 1001
 
 # Activate virtual environment.
 
