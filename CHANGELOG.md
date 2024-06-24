@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.3] - 2024-06-24
+
+### Changed in 3.10.3
+
+- Updated Dockerfile FROM to `senzing/senzingapi-runtime:3.10.3`
+- Updated to SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.10.3-24163"
+
 ## [3.10.1] - 2024-05-22
 
 ### Changed in 3.10.1
