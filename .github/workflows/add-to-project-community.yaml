@@ -12,9 +12,9 @@ permissions:
 jobs:
   add-to-project:
     secrets:
-      SENZING_GITHUB_ACCESS_TOKEN: ${{ secrets.SENZING_GITHUB_ACCESS_TOKEN }}
+      SENZING_GITHUB_PROJECT_RW_TOKEN: ${{ secrets.SENZING_GITHUB_PROJECT_RW_TOKEN }}
     uses: senzing-factory/build-resources/.github/workflows/add-to-project.yaml@v2
     with:
-      classic: true
+      classic: false
       project-number: ${{ vars.SENZING_PROJECT_COMMUNITY }}
       org: ${{ vars.SENZING_GITHUB_ACCOUNT_NAME }}
