@@ -87,7 +87,7 @@ RUN apt-get update \
 
 COPY --from=builder /app/venv /app/venv
 
-USER 1001
+#USER 1001
 
 # Activate virtual environment.
 
