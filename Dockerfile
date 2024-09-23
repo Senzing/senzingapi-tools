@@ -20,13 +20,13 @@ USER root
 # Install packages via apt-get.
 
 RUN apt-get update \
-  && apt-get -y install \
-  python3 \
-  python3-dev \
-  python3-pip \
-  python3-venv \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+ && apt-get -y install \
+      python3 \
+      python3-dev \
+      python3-pip \
+      python3-venv \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 # Create and activate virtual environment.
 RUN python3 -m venv /app/venv
@@ -36,9 +36,9 @@ ENV PATH="/app/venv/bin:$PATH"
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip \
-  && pip3 install -r requirements.txt \
-  && rm requirements.txt \
-  && pip3 uninstall -y setuptools pip
+ && pip3 install -r requirements.txt \
+ && rm requirements.txt \
+ && pip3 uninstall -y setuptools pip
 
 # -----------------------------------------------------------------------------
 # Stage: Final
@@ -71,17 +71,16 @@ ENV TERM=xterm
 # Install Senzing package.
 
 RUN apt-get update \
-  && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
+ && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 HEALTHCHECK CMD apt list --installed | grep senzingapi-tools
 
 # Install packages via apt.
 
 RUN apt-get update \
-  && apt-get -y install \
-  python3-psycopg2 \
-  python3-venv \
-  && rm -rf /var/lib/apt/lists/*
+ && apt-get -y install \
+      python3-venv \
+ && rm -rf /var/lib/apt/lists/*
 
 # Copy python virtual environment from the builder image.
 
@@ -97,13 +96,13 @@ ENV PATH="/app/venv/bin:${PATH}"
 # Set environment variables for root.
 
 ENV LANGUAGE=C \
-  LC_ALL=C.UTF-8 \
-  LD_LIBRARY_PATH=/opt/senzing/g2/lib \
-  PATH=${PATH}:/opt/senzing/g2/python \
-  PYTHONPATH=/opt/senzing/g2/python:/opt/senzing/g2/sdk/python \
-  PYTHONUNBUFFERED=1 \
-  SENZING_DOCKER_LAUNCHED=true \
-  SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true
+    LC_ALL=C.UTF-8 \
+    LD_LIBRARY_PATH=/opt/senzing/g2/lib \
+    PATH=${PATH}:/opt/senzing/g2/python \
+    PYTHONPATH=/opt/senzing/g2/python:/opt/senzing/g2/sdk/python \
+    PYTHONUNBUFFERED=1 \
+    SENZING_DOCKER_LAUNCHED=true \
+    SENZING_SKIP_DATABASE_PERFORMANCE_TEST=true
 
 # Runtime execution.
 
