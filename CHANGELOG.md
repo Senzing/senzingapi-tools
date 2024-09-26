@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-[markdownlint](https://dlaa.me/markdownlint/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog], [markdownlint],
+and this project adheres to [Semantic Versioning].
+
+
+## [3.12.0] - 2024-09-25
+
+### Changed in 3.12.0
+
+- Updated Dockerfile FROM to `senzing/senzingapi-runtime:3.12.0`
+- Updated to SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.12.0-24261"
 
 ## [3.10.3] - 2024-06-24
 
@@ -140,3 +147,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed in 3.1.0
 
 - Initial version
+
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
+[markdownlint]: https://dlaa.me/markdownlint/
+[Semantic Versioning]: https://semver.org/spec/v2.0.0.html
