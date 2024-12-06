@@ -1,5 +1,12 @@
 # senzingapi-tools
 
+## :warning: Warning
+
+This repository is specifically for Senzing SDK V4.
+It is not designed to work with Senzing API V3.
+
+To find the Senzing API V3 version of this repository, visit [senzingsdk-tools].
+
 ## Synopsis
 
 A Docker image with Senzingapi library and Senzing tools installed.
@@ -37,3 +44,4 @@ any use of this image complies with any relevant licenses for all software conta
 [license information]: https://senzing.com/end-user-license-agreement/
 [Senzing GitHub community]: https://github.com/Senzing/
 [senzing/senzingapi-tools]: https://hub.docker.com/r/senzing/senzingapi-tools
+[senzingsdk-tools]: https://github.com/Senzing/senzingsdk-tools

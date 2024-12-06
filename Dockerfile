@@ -21,10 +21,10 @@ USER root
 
 RUN apt-get update \
  && apt-get -y install \
-      python3 \
-      python3-dev \
-      python3-pip \
-      python3-venv \
+        python3 \
+        python3-dev \
+        python3-pip \
+        python3-venv \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -54,11 +54,11 @@ ARG SENZING_ACCEPT_EULA
 ARG SENZING_APT_INSTALL_TOOLS_PACKAGE
 
 ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
-  SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
+    SENZING_APT_INSTALL_TOOLS_PACKAGE=${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 LABEL Name="senzing/senzingapi-tools" \
-  Maintainer="support@senzing.com" \
-  Version="3.12.0"
+      Maintainer="support@senzing.com" \
+      Version="3.12.0"
 
 # Run as "root" for system installation.
 
@@ -79,7 +79,7 @@ HEALTHCHECK CMD apt list --installed | grep senzingapi-tools
 
 RUN apt-get update \
  && apt-get -y install \
-      python3-venv \
+        python3-venv \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy python virtual environment from the builder image.
