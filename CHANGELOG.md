@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], [markdownlint],
 and this project adheres to [Semantic Versioning].
 
+## [3.12.5] - 2025-02-04
+
+### Changed in 3.12.5
+
+- Updated Dockerfile FROM to `senzing/senzingapi-runtime:3.12.5`
+- Updated to SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.12.5-25031"
+
 ## [3.12.0] - 2024-09-25
 
 ### Changed in 3.12.0
