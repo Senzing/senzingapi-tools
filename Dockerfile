@@ -20,7 +20,7 @@ USER root
 # Install packages via apt-get.
 
 RUN apt-get update \
- && apt-get -y install \
+ && apt-get -y --no-install-recommends install \
         python3 \
         python3-dev \
         python3-pip \
@@ -72,14 +72,14 @@ ENV TERM=xterm
 # Install Senzing package.
 
 RUN apt-get update \
- && apt-get -y install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
+ && apt-get -y --no-install-recommends install ${SENZING_APT_INSTALL_TOOLS_PACKAGE}
 
 HEALTHCHECK CMD apt list --installed | grep senzingapi-tools
 
 # Install packages via apt.
 
 RUN apt-get update \
- && apt-get -y install \
+ && apt-get -y --no-install-recommends install \
         python3-venv \
  && rm -rf /var/lib/apt/lists/*
 
