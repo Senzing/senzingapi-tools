@@ -1,2 +1,2 @@
-prettytable==3.16.0
+prettytable==3.17.0
 psycopg2-binary==2.9.11
