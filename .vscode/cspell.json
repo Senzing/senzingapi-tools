@@ -2,22 +2,23 @@
   "version": "0.2",
   "language": "en",
   "words": [
-    "CCLA",
-    "CODEOWNER",
-    "Dockerfiles",
-    "ICLA",
-    "PYTHONPATH",
-    "PYTHONUNBUFFERED",
-    "Senzing",
     "alnum",
     "buildx",
+    "CCLA",
+    "CODEOWNER",
+    "cooldown",
+    "Dockerfiles",
     "dockerhub",
     "esbenp",
+    "ICLA",
     "libpostal",
     "prettytable",
     "projectatomic",
     "psycopg",
     "pydevproject",
+    "PYTHONPATH",
+    "PYTHONUNBUFFERED",
+    "Senzing",
     "senzingapi",
     "senzingsdk",
     "setuptools",
@@ -26,7 +27,5 @@
     "toplevel",
     "venv"
   ],
-  "ignorePaths": [
-    ".git/**"
-  ]
+  "ignorePaths": [".git/**"]
 }
