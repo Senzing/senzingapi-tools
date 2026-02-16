@@ -19,8 +19,6 @@ updates:
       - "docktermj"
     cooldown:
       default-days: 21
-      exclude-patterns:
-        - "senzing-factory/*"
     directory: "/"
     schedule:
       interval: "daily"
