@@ -29,7 +29,5 @@
     "toplevel",
     "venv"
   ],
-  "ignorePaths": [
-    ".git/**"
-  ]
+  "ignorePaths": [".git/**"]
 }
