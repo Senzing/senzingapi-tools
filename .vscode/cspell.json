@@ -10,7 +10,6 @@
     "Dockerfiles",
     "dockerhub",
     "docktermj",
-    "esbenp",
     "ICLA",
     "kernelsam",
     "libpostal",
@@ -29,5 +28,7 @@
     "toplevel",
     "venv"
   ],
-  "ignorePaths": [".git/**"]
+  "ignorePaths": [
+    ".git/**"
+  ]
 }

@@ -28,6 +28,7 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_DOCKER_ACCOUNT_ID }}:role/github-actions-ecr-push
           sign-image: true
           username: ${{ secrets.DOCKERHUB_USERNAME }}
+
       - name: Notify Slack on failure
         if: (failure() || cancelled())
         uses: senzing-factory/build-resources/slack-failure-notification@v4
