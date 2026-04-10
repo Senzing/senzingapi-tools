@@ -9,8 +9,6 @@ permissions: {}
 
 jobs:
   docker-push-containers-to-dockerhub-and-ecr:
-    outputs:
-      status: ${{ job.status }}
     permissions:
       attestations: write
       contents: write
@@ -30,13 +28,10 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_DOCKER_ACCOUNT_ID }}:role/github-actions-ecr-push
           sign-image: true
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-
-  slack-notification:
-    needs: [docker-push-containers-to-dockerhub-and-ecr]
-    if: ${{ always() && contains(fromJSON('["failure", "cancelled"]'), needs.docker-push-containers-to-dockerhub-and-ecr.outputs.status) }}
-    secrets:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
-    uses: senzing-factory/build-resources/.github/workflows/build-failure-slack-notification.yaml@v4
-    with:
-      job-status: ${{ needs.docker-push-containers-to-dockerhub-and-ecr.outputs.status }}
+      - name: Notify Slack on failure
+        if: (failure() || cancelled())
+        uses: senzing-factory/build-resources/slack-failure-notification@v4
+        with:
+          job-status: ${{ job.status }}
+          slack-channel: ${{ secrets.SLACK_CHANNEL }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
