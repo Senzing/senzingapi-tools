@@ -5,4 +5,5 @@ rules:
         "*": ref-pin
   secrets-outside-env:
     ignore:
+      - docker-build-container.yaml
       - docker-push-containers-to-dockerhub-and-ecr.yaml
