@@ -1,9 +1,9 @@
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.13.0@sha256:c9c3502b35fbcc30d3cdbe3597392f964c7a15db52736dac938d28916d121f70
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.13.1@sha256:49e371a779eea2d0fdf4d2c904cb1e3aacfec93f6aeb63057611cd17e5933fe2
 
 # Create the runtime image.
 
 ARG SENZING_ACCEPT_EULA="I_ACCEPT_THE_SENZING_EULA"
-ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.13.0-25273"
+ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.13.1-25323"
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -11,7 +11,7 @@ ARG SENZING_APT_INSTALL_TOOLS_PACKAGE="senzingapi-tools=3.13.0-25273"
 
 FROM ${BASE_IMAGE} AS builder
 
-ENV REFRESHED_AT=2026-02-09
+ENV REFRESHED_AT=2026-06-17
 
 # Run as "root" for system installation.
 
@@ -48,7 +48,7 @@ RUN pip3 install --upgrade pip \
 
 FROM ${BASE_IMAGE} AS runner
 
-ENV REFRESHED_AT=2026-02-09
+ENV REFRESHED_AT=2026-06-17
 
 ARG SENZING_ACCEPT_EULA
 ARG SENZING_APT_INSTALL_TOOLS_PACKAGE
@@ -58,8 +58,8 @@ ENV SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
 
 LABEL Name="senzing/senzingapi-tools" \
       Maintainer="support@senzing.com" \
-      Version="3.13.0" \
-      SenzingAPI="3.13.0"
+      Version="3.13.1" \
+      SenzingAPI="3.13.1"
 
 # Run as "root" for system installation.
 
