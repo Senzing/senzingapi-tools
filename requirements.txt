@@ -1,2 +1,2 @@
 prettytable==3.18.0
-psycopg2-binary==2.9.12
+psycopg2-binary==2.9.13
